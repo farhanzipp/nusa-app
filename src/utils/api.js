@@ -1,6 +1,7 @@
 export async function loginUser(credentials) {
-    return fetch('http://localhost:8080/nusa-api/users/login', {
+    return fetch('https://jibas.tasnusa.online/nusa-api/users/login', {
     method: 'POST',
+    mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
