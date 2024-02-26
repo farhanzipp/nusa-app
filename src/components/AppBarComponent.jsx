@@ -23,6 +23,12 @@ export default function AppBarComponent() {
     }
   };
 
+  const logoStyle = {
+    width: '40px',
+    height: 'auto',
+    cursor: 'pointer',
+  };
+
   return (
     <div>
       <AppBar
@@ -59,26 +65,24 @@ export default function AppBarComponent() {
                 px: 0,
               }}
             >
-              <Typography
-                variant='body1'
-                color='text.primary'
-                sx={{ pr: '1rem' }}
-              >
-                NUSA
-              </Typography>
+              <img
+                src='/nusa_green.png'
+                style={logoStyle}
+                alt="logo of nusa"
+              />
 
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
-                  onClick={() => scrollToSection('features')}
+                  onClick={() => scrollToSection('datasiswa')}
                   sx={{ py: '6px', px: '12px' }}
                 >
-                  <Typography variant='body2' color='text.primary'>Features</Typography>
+                  <Typography variant='body2' color='text.primary'>Data Siswa</Typography>
                 </MenuItem>
                 <MenuItem
-                  onClick={() => scrollToSection('about')}
+                  onClick={() => scrollToSection('aplikasi')}
                   sx={{ py: '6px', px: '12px' }}
                 >
-                  <Typography variant='body2' color='text.primary'>About</Typography>
+                  <Typography variant='body2' color='text.primary'>Aplikasi</Typography>
                 </MenuItem>
               </Box>
             </Box>
