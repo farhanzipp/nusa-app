@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { loginUser } from '../utils/api';
+import { loginUser } from '../utils/login_api';
 import { useState } from 'react';
 
 function Copyright(props) {

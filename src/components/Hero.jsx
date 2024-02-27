@@ -20,10 +20,16 @@ export default function Hero() {
                     pb: { xs: 8, sm: 12 },
                 }}
             >
-                <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
+                <Stack spacing={2} alignItems="center" sx={{ width: { xs: '100%', sm: '70%' } }}>
+                    <img
+                        src='/nusa_green.png'
+                        alt="logo of nusa"
+                        width={100}
+                        loading="true"
+                    />
                     <Typography
                         component="h1"
-                        variant="body-1"
+                        variant="h5"
                         sx={{
                             display: 'flex',
                             flexDirection: { xs: 'column', md: 'row' },

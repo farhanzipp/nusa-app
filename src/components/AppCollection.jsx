@@ -1,9 +1,9 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Chip, Container, Grid, Link, Paper, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Container, Grid, Link, Paper, Typography } from "@mui/material";
 
 function AppCard({ title, image, content, link }) {
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 400 }}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={image}
@@ -18,7 +18,6 @@ function AppCard({ title, image, content, link }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Share</Button>
                 <Link href={link} target="_blank" underline="hover">
                     <Button size="small">Visit</Button>
                 </Link>
@@ -44,19 +43,18 @@ export default function AppCollection() {
         {
             title: "Proposal Kegiatan",
             image: "datasiswa.JPG",
-            content: "Aplikasi Wawancara PSB",
-            link: "https://www.google.com"
+            content: "Aplikasi arsip proposal kegiatan NUSA",
+            link: "/proposal"
         },
     ]
     return (
         <Container id="aplikasi">
-            <Paper elevation={3} sx={{ marginY: '2rem',  paddingY: '1.5rem' }}>
-                <Container>
+            <Box elevation={3} sx={{ marginY: '2rem',  paddingY: '1.5rem' }}>
                     <Chip label='Aplikasi' sx={{ marginBottom: '1rem' }} />
                     <Grid container spacing={2}>
                     
                     {cardDatas.map((data, index) => 
-                        <Grid item xs={12} md={4} key = {index}>
+                        <Grid item xs={12} sm={6} md={4} key = {index}>
                             <AppCard
                                 title={data.title}
                                 image={data.image}
@@ -66,8 +64,7 @@ export default function AppCollection() {
                         </Grid>
                     )}
                     </Grid>
-                </Container>
-            </Paper>
+            </Box>
         </Container>
     )
 }

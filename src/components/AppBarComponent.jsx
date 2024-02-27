@@ -1,6 +1,7 @@
 import { Menu } from '@mui/icons-material';
 import { AppBar, Box, Button, Container, Drawer, MenuItem, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 export default function AppBarComponent() {
   const [open, setOpen] = useState(false);
@@ -65,11 +66,13 @@ export default function AppBarComponent() {
                 px: 0,
               }}
             >
-              <img
-                src='/nusa_green.png'
-                style={logoStyle}
-                alt="logo of nusa"
-              />
+              <Link to='/'>
+                <img
+                  src='/nusa_green.png'
+                  style={logoStyle}
+                  alt="logo of nusa"
+                />
+              </Link>
 
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
