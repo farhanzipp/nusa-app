@@ -1,4 +1,4 @@
-import { Button, Chip, Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import DataTable from "../components/DataTable";
 import { useState } from "react";
 import ModalAddProposal from "../components/Proposal/ModalAddProposal";

@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import { Box, Container, TextField } from '@mui/material';
+import { Box, Container, Stack, TextField } from '@mui/material';
 import DateComponent from './DateComponent';
 import { Add } from '@mui/icons-material';
 import UploadFileButton from './UploadFileButton';
@@ -21,9 +21,29 @@ export default function ModalAddProposal({ open, setOpen }) {
         setOpen(!open);
     };
 
-    const handleSubmit = () => {
-        console.log('submit')
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const proposalData = {
+            proposal_titles : data.get('proposal_titles'),
+            commitee_names : data.get('commitee_names'),
+            date_started: data.get('date_started'),
+            date_ended: data.get('date_ended'),
+            proposal_amt: data.get('proposal_amt'),
+            realization_amt: data.get('realization_amt'),
+            proposal_notes: data.get('proposal_notes')
+        }
+
+        const proposalFile = data.get('proposal_file')
+        
+        console.log(proposalData);
+        console.log(proposalFile);
+        // const response = await postProposal({
+        //   email: email, 
+        //   password: password
+        // });
     }
+
     return (
         <Dialog
             fullScreen
@@ -57,7 +77,7 @@ export default function ModalAddProposal({ open, setOpen }) {
                 >
                     <Box
                         component="form"
-                        noValidate onSubmit={handleSubmit}
+                        onSubmit={handleSubmit}
 
                     >
                         <TextField
@@ -77,11 +97,41 @@ export default function ModalAddProposal({ open, setOpen }) {
                             required
                             fullWidth
                         />
+
                         <DateComponent />
 
+                        <Stack
+                            direction='row'
+                            spacing={3}
+                            sx={{
+                                marginTop: '1.5rem',
+                                marginBottom: '1rem'
+                            }}
+                        >
+                            <TextField
+                                id="proposal_amt"
+                                name="proposal_amt"
+                                label="Anggaran"
+                                type='number'
+                                margin="normal"
+                                required
+                                fullWidth
+                                autoFocus
+                            />
+                            <TextField
+                                id="realization_amt"
+                                name="realization_amt"
+                                label="Realisasi Anggaran"
+                                type='number'
+                                margin="normal"
+                                required
+                                fullWidth
+                            />
+                        </Stack>
+
                         <TextField
-                            id="catatan"
-                            name="catatan"
+                            id="proposal_notes"
+                            name="proposal_notes"
                             label="Catatan Penting"
                             margin='dense'
                             fullWidth
