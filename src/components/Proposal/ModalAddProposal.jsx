@@ -8,6 +8,9 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Box, Container, TextField } from '@mui/material';
+import DateComponent from './DateComponent';
+import { Add } from '@mui/icons-material';
+import UploadFileButton from './UploadFileButton';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -43,38 +46,63 @@ export default function ModalAddProposal({ open, setOpen }) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                />
 
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+            <Container>
+                <Box
+                    sx={{
+                        mt: 1,
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
                 >
-                    Submit
-                </Button>
-            </Box>
+                    <Box
+                        component="form"
+                        noValidate onSubmit={handleSubmit}
+
+                    >
+                        <TextField
+                            id="proposal_titles"
+                            name="proposal_titles"
+                            label="Judul Kegiatan"
+                            margin="normal"
+                            required
+                            fullWidth
+                            autoFocus
+                        />
+                        <TextField
+                            id="commitee_names"
+                            name="commitee_names"
+                            label="Ketua Panitia"
+                            margin="normal"
+                            required
+                            fullWidth
+                        />
+                        <DateComponent />
+
+                        <TextField
+                            id="catatan"
+                            name="catatan"
+                            label="Catatan Penting"
+                            margin='dense'
+                            fullWidth
+                            multiline
+                            rows={3}
+                        />
+
+                        <UploadFileButton />
+
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            <Add />
+                            Submit
+                        </Button>
+                    </Box>
+                </Box>
+            </Container>
         </Dialog>
     );
 }
