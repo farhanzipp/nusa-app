@@ -11,6 +11,7 @@ import { Box, Container, Stack, TextField } from '@mui/material';
 import DateComponent from './DateComponent';
 import { Add } from '@mui/icons-material';
 import UploadFileButton from './UploadFileButton';
+import { postProposal, postProposalFile } from '../../utils/proposal_api';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -21,27 +22,41 @@ export default function ModalAddProposal({ open, setOpen }) {
         setOpen(!open);
     };
 
+    function renameProposalFile(file, newFileName) {
+        const fileExtension = file.name.split('.').pop(); // Get the file extension
+        const renamedFile = new File([file], newFileName + '.' + fileExtension, { type: file.type });
+        return renamedFile;
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const proposalData = {
-            proposal_titles : data.get('proposal_titles'),
-            commitee_names : data.get('commitee_names'),
+            proposal_titles: data.get('proposal_titles'),
+            commitee_names: data.get('commitee_names'),
             date_started: data.get('date_started'),
             date_ended: data.get('date_ended'),
             proposal_amt: data.get('proposal_amt'),
             realization_amt: data.get('realization_amt'),
-            proposal_notes: data.get('proposal_notes')
+            proposal_notes: data.get('proposal_notes'),
+            pdffile_titles: 'lorem.file'
         }
 
         const proposalFile = data.get('proposal_file')
+        const renamedProposalFile = renameProposalFile(proposalFile, proposalData.proposal_titles);
         
-        console.log(proposalData);
-        console.log(proposalFile);
-        // const response = await postProposal({
-        //   email: email, 
-        //   password: password
-        // });
+        try {
+            // const proposalResponse = await postProposal(proposalData);
+            // const fileResponse = await postProposalFile(renamedProposalFile);
+            console.log(renamedProposalFile);
+
+            // console.log('Proposal posted:', proposalResponse);
+            // console.log('File uploaded:', fileResponse);
+
+            // event.currentTarget.reset();
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     return (

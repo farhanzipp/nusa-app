@@ -30,6 +30,7 @@ export default function UploadFileButton() {
             tabIndex={-1}
             startIcon={<CloudUpload />}
             sx={{marginTop: '1rem'}}
+            
         >
             {selectedFile ? selectedFile.name : 'UPLOAD FILE'}
             <VisuallyHiddenInput 
@@ -37,6 +38,7 @@ export default function UploadFileButton() {
                 name="proposal_file" 
                 type="file"
                 onChange={handleFileChange}
+                required
             />
         </Button>
     )
