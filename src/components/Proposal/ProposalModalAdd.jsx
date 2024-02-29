@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
@@ -8,16 +7,21 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { Box, Container, Stack, TextField } from '@mui/material';
-import DateComponent from './DateComponent';
-import { Add } from '@mui/icons-material';
+import { Save } from '@mui/icons-material';
 import UploadFileButton from './UploadFileButton';
 import { postProposal, postProposalFile } from '../../utils/proposal_api';
+import dayjs from 'dayjs';
+import { useState } from 'react';
+import { forwardRef } from 'react';
+import ProposalDateComponent from './ProposalDateComponent';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ModalAddProposal({ open, setOpen }) {
+export default function ProposalModalAdd({ open, setOpen }) {
+    const [loading, setLoading] = useState(false);
+    
     const handleClickOpen = () => {
         setOpen(!open);
     };
@@ -29,33 +33,38 @@ export default function ModalAddProposal({ open, setOpen }) {
     }
 
     const handleSubmit = async (event) => {
+        setLoading(true);
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        const dateStart = dayjs(data.get('date_started')).format('YYYY-MM-DD');
+        const dateEnd = dayjs(data.get('date_ended')).format('YYYY-MM-DD')
+
         const proposalData = {
             proposal_titles: data.get('proposal_titles'),
             commitee_names: data.get('commitee_names'),
-            date_started: data.get('date_started'),
-            date_ended: data.get('date_ended'),
+            date_started: dateStart,
+            date_ended: dateEnd,
             proposal_amt: data.get('proposal_amt'),
             realization_amt: data.get('realization_amt'),
             proposal_notes: data.get('proposal_notes'),
-            pdffile_titles: 'lorem.file'
+            pdffile_titles: data.get('proposal_titles').toLowerCase().replace(/[^a-z]/g, "_")
         }
 
         const proposalFile = data.get('proposal_file')
-        const renamedProposalFile = renameProposalFile(proposalFile, proposalData.proposal_titles);
+        const renamedProposalFile = renameProposalFile(proposalFile, proposalData.proposal_titles.toLowerCase().replace(/[^a-z]/g, "_"));
         
         try {
-            // const proposalResponse = await postProposal(proposalData);
-            // const fileResponse = await postProposalFile(renamedProposalFile);
-            console.log(renamedProposalFile);
+            await postProposalFile(renamedProposalFile);
+            await postProposal(proposalData);
 
-            // console.log('Proposal posted:', proposalResponse);
-            // console.log('File uploaded:', fileResponse);
-
-            // event.currentTarget.reset();
+            alert('Proposal submitted successfully!');
+            setLoading(false)
+            handleClickOpen();
+            location.reload();
+            
         } catch (error) {
             console.error('Error:', error);
+            alert('Failed to submit proposal. Please try again later.');
         }
     }
 
@@ -113,7 +122,7 @@ export default function ModalAddProposal({ open, setOpen }) {
                             fullWidth
                         />
 
-                        <DateComponent />
+                        <ProposalDateComponent />
 
                         <Stack
                             direction='row'
@@ -161,9 +170,10 @@ export default function ModalAddProposal({ open, setOpen }) {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            disabled={loading? true: false}
+                            startIcon={<Save />}
                         >
-                            <Add />
-                            Submit
+                            {loading? 'LOADING...':'SAVE'}
                         </Button>
                     </Box>
                 </Box>
@@ -171,3 +181,4 @@ export default function ModalAddProposal({ open, setOpen }) {
         </Dialog>
     );
 }
+

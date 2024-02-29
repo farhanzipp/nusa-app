@@ -1,11 +1,14 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
-import DataTable from "../components/DataTable";
+import ProposalDataTable from "../components/Proposal/ProposalDataTable";
 import { useState } from "react";
-import ModalAddProposal from "../components/Proposal/ModalAddProposal";
+import ProposalModalAdd from "../components/Proposal/ProposalModalAdd";
 import { Add } from "@mui/icons-material";
+import ProposalModalDetail from "../components/Proposal/ProposalModalDetail";
 
 export default function Proposal() {
     const [open, setOpen] = useState(false);
+    const [openDetail, setOpenDetail] = useState(false);
+    const [proposalId, setProposalId] = useState();
 
     return (
         <Container sx={{ paddingTop: '6rem', minHeight: '90vh' }}>
@@ -31,8 +34,9 @@ export default function Proposal() {
                 </Button>
 
             </Stack>
-            <DataTable />
-            <ModalAddProposal open={open} setOpen={setOpen} />
+            <ProposalDataTable setOpenDetail={setOpenDetail} setProposalId={setProposalId} />
+            <ProposalModalAdd open={open} setOpen={setOpen} />
+            <ProposalModalDetail openDetail={openDetail} setOpenDetail={setOpenDetail} proposalId={proposalId}/>
         </Container>
 
     )

@@ -3,7 +3,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/id';
 
-export default function DateComponent() {
+export default function ProposalDateComponent() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='id'>
         <Stack
@@ -16,12 +16,14 @@ export default function DateComponent() {
             <DatePicker 
               id="date_started"
               name="date_started"
-              label="Tgl Mulai" 
+              label="Tgl Mulai"
+              required 
             />
             <DatePicker 
               id="date_ended"
               name="date_ended"
               label="Tgl Selesai"  
+              required
             />
 
         </Stack>
