@@ -39,7 +39,7 @@ export async function postProposal(proposalData) {
     },
     body: JSON.stringify(proposalData)
   })
-  .then(response => response.json());
+    .then(response => response.json());
 }
 
 export async function postProposalFile(proposalFile) {
@@ -51,12 +51,40 @@ export async function postProposalFile(proposalFile) {
     mode: 'cors',
     body: formData
   })
-  .then(response => response.json());
+    .then(response => response.json());
 }
 
 export async function getProposalDetail(proposalId) {
   return fetch(`https://jibas.tasnusa.online/nusa-api/proposals?id=${proposalId}`, {
     method: 'GET',
   })
-  .then(response => response.json());
+    .then(response => response.json());
+}
+
+export async function getProposalFile(pdfTitle) {
+  return fetch(`https://jibas.tasnusa.online/nusa-api/upload/proposals/${pdfTitle}`, {
+    method: 'GET',
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob();
+    })
+    .then(blob => {
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(blob);
+
+      // Set the download attribute to specify the filename
+      downloadLink.setAttribute('download', pdfTitle);
+
+      // Append the anchor element to the body
+      document.body.appendChild(downloadLink);
+
+      // Click the link to start the download
+      downloadLink.click();
+
+      // Cleanup: Remove the temporary anchor element
+      document.body.removeChild(downloadLink);
+    })
 }

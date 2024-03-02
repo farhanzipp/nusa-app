@@ -35,10 +35,12 @@ export default function ProposalModalAdd({ open, setOpen }) {
     const handleSubmit = async (event) => {
         setLoading(true);
         event.preventDefault();
+        
         const data = new FormData(event.currentTarget);
         const dateStart = dayjs(data.get('date_started')).format('YYYY-MM-DD');
         const dateEnd = dayjs(data.get('date_ended')).format('YYYY-MM-DD')
-
+        
+        let pdfName = ''
         const proposalData = {
             proposal_titles: data.get('proposal_titles'),
             commitee_names: data.get('commitee_names'),
@@ -47,12 +49,14 @@ export default function ProposalModalAdd({ open, setOpen }) {
             proposal_amt: data.get('proposal_amt'),
             realization_amt: data.get('realization_amt'),
             proposal_notes: data.get('proposal_notes'),
-            pdffile_titles: data.get('proposal_titles').toLowerCase().replace(/[^a-z]/g, "_")
+            pdffile_titles: pdfName
         }
 
         const proposalFile = data.get('proposal_file')
         const renamedProposalFile = renameProposalFile(proposalFile, proposalData.proposal_titles.toLowerCase().replace(/[^a-z]/g, "_"));
-        
+        pdfName = renamedProposalFile.name;
+        proposalData.pdffile_titles = pdfName;
+
         try {
             await postProposalFile(renamedProposalFile);
             await postProposal(proposalData);
@@ -162,9 +166,18 @@ export default function ProposalModalAdd({ open, setOpen }) {
                             multiline
                             rows={3}
                         />
-
-                        <UploadFileButton />
-
+                        <Box 
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'end',
+                                gap:'5px'
+                            }}
+                        >
+                            <UploadFileButton />
+                            <Typography variant="caption">
+                                max 2mb
+                            </Typography>
+                        </Box>
                         <Button
                             type="submit"
                             fullWidth

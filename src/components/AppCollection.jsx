@@ -1,15 +1,15 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Container, Grid, Link, Paper, Typography } from "@mui/material";
-
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Container, Grid, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 function AppCard({ title, image, content, link }) {
 
     return (
         <Card sx={{ maxWidth: 400 }}>
             <CardMedia
-                sx={{ height: 140 }}
+                sx={{ height: 150 }}
                 image={image}
                 title={title}
             />
-            <CardContent>
+            <CardContent sx={{ height: 100 }}>
                 <Typography gutterBottom variant="h5" component="div">
                     {title}
                 </Typography>
@@ -18,7 +18,7 @@ function AppCard({ title, image, content, link }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Link href={link} target="_blank" underline="hover">
+                <Link to={link}>
                     <Button size="small">Visit</Button>
                 </Link>
             </CardActions>
@@ -30,19 +30,19 @@ export default function AppCollection() {
     const cardDatas = [
         {
             title: "Data Siswa",
-            image: "datasiswa.JPG",
+            image: "datasiswa.png",
             content: "Aplikasi pengelolaan data NUSA",
-            link: "https://www.google.com"
+            link: "/datasiswa"
         },
         {
             title: "Dashboard PSB",
-            image: "datasiswa.JPG",
+            image: "psb.png",
             content: "Aplikasi Wawancara PSB",
             link: "https://www.google.com"
         },
         {
             title: "Proposal Kegiatan",
-            image: "datasiswa.JPG",
+            image: "proposal.png",
             content: "Aplikasi arsip proposal kegiatan NUSA",
             link: "/proposal"
         },

@@ -56,6 +56,7 @@ export default function ProposalDataTable({setOpenDetail, setProposalId}) {
           },
         }}
         pageSizeOptions={[5, 10]}
+        disableRowSelectionOnClick
       />
     </div>
   );

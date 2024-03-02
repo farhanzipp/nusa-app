@@ -15,11 +15,16 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function UploadFileButton() {
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [file, setFile] = useState(null);
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
+        const selectedFile = event.target.files[0];
+        const maxSize = 2 * 1024 * 1024; // 2 MB
+        if (selectedFile && selectedFile.size > maxSize) {
+            alert('File size exceeds the limit (2 MB). Please select a smaller file.');
+        } else {
+            setFile(selectedFile);
+        }
     };
 
     return (
@@ -29,13 +34,13 @@ export default function UploadFileButton() {
             variant="contained"
             tabIndex={-1}
             startIcon={<CloudUpload />}
-            sx={{marginTop: '1rem'}}
-            
+            sx={{ marginTop: '1rem' }}
+
         >
-            {selectedFile ? selectedFile.name : 'UPLOAD FILE'}
-            <VisuallyHiddenInput 
-                id="proposal_file" 
-                name="proposal_file" 
+            {file ? file.name : 'UPLOAD FILE'}
+            <VisuallyHiddenInput
+                id="proposal_file"
+                name="proposal_file"
                 type="file"
                 onChange={handleFileChange}
                 required

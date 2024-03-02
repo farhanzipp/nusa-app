@@ -16,7 +16,7 @@ export default function DataSiswa() {
                 <Paper elevation={3}>
                     <Container sx={{ paddingTop: '1.5rem' }}>
                         <Chip label={chipLabel} />
-                        <Box sx={{ display: {sm: 'flex'} }}>
+                        <Box sx={{display: 'flex', flexDirection: {xs:'column', sm:'row'} }}>
                             <PieChart
                                 series={[
                                     {

@@ -10,19 +10,10 @@ export default function AppBarComponent() {
     setOpen(newOpen);
   };
 
-  const scrollToSection = (sectionId) => {
-    const sectionElement = document.getElementById(sectionId);
-    const offset = 128;
-    if (sectionElement) {
-      const targetScroll = sectionElement.offsetTop - offset;
-      sectionElement.scrollIntoView({ behavior: 'smooth' });
-      window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth',
-      });
-      setOpen(false);
-    }
-  };
+  const menus = [
+    { title: 'Home', link: '/' },
+    { title: 'Proposal', link: '/proposal' },
+  ]
 
   const logoStyle = {
     width: '40px',
@@ -58,6 +49,7 @@ export default function AppBarComponent() {
               boxShadow: `0 0 1px rgba(85, 166, 246, 0.1), 1px 1.5px 2px -1px rgba(85, 166, 246, 0.15), 4px 4px 12px -2.5px rgba(85, 166, 246, 0.15)`
             }}
           >
+            {/* dekstop menu */}
             <Box
               sx={{
                 flexGrow: 1,
@@ -74,25 +66,25 @@ export default function AppBarComponent() {
                 />
               </Link>
 
-              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <MenuItem
-                  onClick={() => scrollToSection('datasiswa')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant='body2' color='text.primary'>Data Siswa</Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('aplikasi')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant='body2' color='text.primary'>Aplikasi</Typography>
-                </MenuItem>
+              <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+                {menus.map((menu, index) =>
+                  <MenuItem key={index}
+                    sx={{ py: '6px', px: '12px' }}
+                  >
+                    <Link to={menu.link} style={{textDecoration: 'none'}}>
+                      <Typography variant='body1' color='text.primary'>
+                            {menu.title}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                )}
               </Box>
             </Box>
-            <Box sx={{ display: { sm: '', md: 'none' } }}>
+            {/* mobile menu */}
+            <Box sx={{ display: { sm: 'none' } }}>
               <Button
                 variant="text"
-                color="primary"
+                color="success"
                 aria-label="menu"
                 onClick={toggleDrawer(true)}
                 sx={{ minWidth: '30px', p: '4px' }}
@@ -102,24 +94,20 @@ export default function AppBarComponent() {
               <Drawer anchor='right' open={open} onClose={toggleDrawer(false)}>
                 <Box
                   sx={{
-                    minWidth: '40dvw',
+                    minWidth: '50dvw',
                     p: 2,
                     backgroundColor: 'background.paper',
                     flexGrow: 1,
                   }}
                 >
-                  <MenuItem
-                    onClick={() => scrollToSection('features')}
-                    sx={{ py: '6px', px: '12px' }}
-                  >
-                    <Typography variant='body2' color='text.primary'>Features</Typography>
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => scrollToSection('about')}
-                    sx={{ py: '6px', px: '12px' }}
-                  >
-                    <Typography variant='body2' color='text.primary'>About</Typography>
-                  </MenuItem>
+                  {menus.map((menu, index) => 
+                    <MenuItem key={index} >
+                      <Link to={menu.link} style={{textDecoration: 'none'}}>
+                        <Typography variant='body2' color='text.primary'>{menu.title}</Typography>
+                      </Link>
+                    </MenuItem>
+                  )}
+
                 </Box>
               </Drawer>
             </Box>

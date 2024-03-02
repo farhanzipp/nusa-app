@@ -12,6 +12,7 @@ export default function Hero() {
             }}
         >
             <Container
+                maxWidth="lg"
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
