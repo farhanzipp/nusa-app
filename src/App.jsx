@@ -8,12 +8,13 @@ import Proposal from "./pages/Proposal"
 
 function App() {
   return (
-    <BrowserRouter> 
+    <BrowserRouter basename="/nusa/"> 
       <Routes>
         {/* no layout */}
-        <Route index element={<Home />}/>
         <Route path="login" element={<SignInSide />}/>
+        {/*with layout */}
         <Route path="/" element={<Layout />}>
+          <Route index element={<Home />}/>
           <Route path="profile" element={<Profile />}/>
           <Route path="proposal" element={<Proposal />}/>
           <Route path="*" element={<NoPage />}/>

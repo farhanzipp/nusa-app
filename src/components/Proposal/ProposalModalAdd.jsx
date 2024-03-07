@@ -64,7 +64,7 @@ export default function ProposalModalAdd({ open, setOpen }) {
             alert('Proposal submitted successfully!');
             setLoading(false)
             handleClickOpen();
-            location.reload();
+         
             
         } catch (error) {
             console.error('Error:', error);
@@ -175,7 +175,7 @@ export default function ProposalModalAdd({ open, setOpen }) {
                         >
                             <UploadFileButton />
                             <Typography variant="caption">
-                                max 2mb
+                                format doc. max 2mb
                             </Typography>
                         </Box>
                         <Button

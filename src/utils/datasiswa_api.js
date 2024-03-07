@@ -1,5 +1,7 @@
+import { hostUrl } from "./host_url";
+
 export async function getDatasiswa() {
-    return fetch('http://10.10.10.9/nusa-api/students/totals', {
+    return fetch(`https://${hostUrl}/nusa-api/students/totals`, {
         method: 'GET',
         mode: 'cors',
     })

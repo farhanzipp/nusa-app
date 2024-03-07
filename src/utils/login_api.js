@@ -1,5 +1,7 @@
+import {hostUrl} from "./host_url";
+
 export async function loginUser(credentials) {
-    return fetch('https://jibas.tasnusa.online/nusa-api/users/login', {
+    return fetch(`http://${hostUrl}/nusa-api/users/login`, {
     method: 'POST',
     mode: 'cors',
     headers: {

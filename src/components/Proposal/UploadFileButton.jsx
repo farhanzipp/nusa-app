@@ -42,6 +42,7 @@ export default function UploadFileButton() {
                 id="proposal_file"
                 name="proposal_file"
                 type="file"
+                accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 onChange={handleFileChange}
                 required
             />

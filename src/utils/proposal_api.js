@@ -1,6 +1,8 @@
+import { hostUrl } from "./host_url";
+
 export async function getAllProposals() {
   try {
-    const response = await fetch('https://jibas.tasnusa.online/nusa-api/proposals', {
+    const response = await fetch(`https://${hostUrl}/nusa-api/proposals`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -31,7 +33,7 @@ export async function getAllProposals() {
 
 
 export async function postProposal(proposalData) {
-  return fetch('https://jibas.tasnusa.online/nusa-api/proposals', {
+  return fetch(`https://${hostUrl}/nusa-api/proposals`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -46,7 +48,7 @@ export async function postProposalFile(proposalFile) {
   const formData = new FormData();
   formData.append('file', proposalFile);
 
-  return fetch('https://jibas.tasnusa.online/nusa-api/upload/proposals', {
+  return fetch(`https://${hostUrl}/nusa-api/upload/proposals`, {
     method: 'POST',
     mode: 'cors',
     body: formData
@@ -55,14 +57,14 @@ export async function postProposalFile(proposalFile) {
 }
 
 export async function getProposalDetail(proposalId) {
-  return fetch(`https://jibas.tasnusa.online/nusa-api/proposals?id=${proposalId}`, {
+  return fetch(`https://${hostUrl}/nusa-api/proposals?id=${proposalId}`, {
     method: 'GET',
   })
     .then(response => response.json());
 }
 
 export async function getProposalFile(pdfTitle) {
-  return fetch(`https://jibas.tasnusa.online/nusa-api/upload/proposals/${pdfTitle}`, {
+  return fetch(`https://${hostUrl}/nusa-api/upload/proposals/${pdfTitle}`, {
     method: 'GET',
   })
     .then(response => {

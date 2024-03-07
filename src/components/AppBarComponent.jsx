@@ -60,7 +60,7 @@ export default function AppBarComponent() {
             >
               <Link to='/'>
                 <img
-                  src='/nusa_green.png'
+                  src='nusa_green.png'
                   style={logoStyle}
                   alt="logo of nusa"
                 />
