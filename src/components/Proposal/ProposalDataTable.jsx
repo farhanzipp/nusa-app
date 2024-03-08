@@ -1,24 +1,11 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
-import { getAllProposals } from '../../utils/proposal_api';
 import dayjs from 'dayjs';
 import { Button } from '@mui/material';
 
-export default function ProposalDataTable({setOpenDetail, setProposalId}) {
-  const [proposals, setProposals] = useState([]);
-  useEffect(() => {
-    getAllProposals()
-      .then(response => {
-        setProposals(response.data)
-      })
-      .catch(error => {
-        console.error('Error fetching proposals:', error);
-      });
-  }, []);
-
+export default function ProposalDataTable({proposals, setProposalId, setOpenDetail}) {
   function handleClick(proposalId){
     setProposalId(proposalId)
-    setOpenDetail(true);
+    setOpenDetail(true); 
   }
 
   const proposalColumns = [

@@ -2,6 +2,7 @@ import { Menu } from '@mui/icons-material';
 import { AppBar, Box, Button, Container, Drawer, MenuItem, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import NUSA from '../assets/nusa_green.png'
 
 export default function AppBarComponent() {
   const [open, setOpen] = useState(false);
@@ -60,7 +61,7 @@ export default function AppBarComponent() {
             >
               <Link to='/'>
                 <img
-                  src='nusa_green.png'
+                  src={NUSA}
                   style={logoStyle}
                   alt="logo of nusa"
                 />

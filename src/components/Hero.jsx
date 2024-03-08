@@ -1,4 +1,5 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
+import NUSA from '../assets/nusa_green.png'
 
 export default function Hero() {
     return (
@@ -23,7 +24,7 @@ export default function Hero() {
             >
                 <Stack spacing={2} alignItems="center" sx={{ width: { xs: '100%', sm: '70%' } }}>
                     <img
-                        src='nusa_green.png'
+                        src={NUSA}
                         alt="logo of nusa"
                         width={100}
                         loading="true"

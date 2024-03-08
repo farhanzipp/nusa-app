@@ -1,7 +1,10 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-function AppCard({ title, image, content, link }) {
+import DATASISWA from '../assets/datasiswa.png'
+import PROPOSAL from '../assets/proposal.png'
+import PSB from '../assets/psb.png'
 
+function AppCard({ title, image, content, link }) {
     return (
         <Card sx={{ maxWidth: 400 }}>
             <CardMedia
@@ -30,19 +33,19 @@ export default function AppCollection() {
     const cardDatas = [
         {
             title: "Data Siswa",
-            image: "datasiswa.png",
+            image: DATASISWA,
             content: "Aplikasi pengelolaan data NUSA",
             link: "/datasiswa"
         },
         {
             title: "Dashboard PSB",
-            image: "psb.png",
+            image: PSB,
             content: "Aplikasi Wawancara PSB",
             link: "https://www.google.com"
         },
         {
             title: "Proposal Kegiatan",
-            image: "proposal.png",
+            image: PROPOSAL,
             content: "Aplikasi arsip proposal kegiatan NUSA",
             link: "/proposal"
         },

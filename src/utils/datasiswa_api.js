@@ -4,6 +4,7 @@ export async function getDatasiswa() {
     return fetch(`https://${hostUrl}/nusa-api/students/totals`, {
         method: 'GET',
         mode: 'cors',
+        credentials: 'same-origin',
     })
         .then(response => response.json());
 }

@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import { forwardRef } from 'react';
 import ProposalDateComponent from './ProposalDateComponent';
+import { useNavigate } from 'react-router-dom';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -21,6 +22,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function ProposalModalAdd({ open, setOpen }) {
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     
     const handleClickOpen = () => {
         setOpen(!open);
@@ -64,7 +66,7 @@ export default function ProposalModalAdd({ open, setOpen }) {
             alert('Proposal submitted successfully!');
             setLoading(false)
             handleClickOpen();
-         
+            navigate('/');
             
         } catch (error) {
             console.error('Error:', error);
