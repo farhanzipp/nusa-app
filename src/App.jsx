@@ -5,6 +5,7 @@ import Layout from "./pages/Layout"
 import NoPage from "./pages/NoPage"
 import Profile from "./pages/Profile"
 import Proposal from "./pages/Proposal"
+import Siswa from "./pages/Siswa"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Home />}/>
           <Route path="profile" element={<Profile />}/>
           <Route path="proposal" element={<Proposal />}/>
+          <Route path="datasiswa" element={<Siswa />}/>
           <Route path="*" element={<NoPage />}/>
         </Route>
       </Routes>
