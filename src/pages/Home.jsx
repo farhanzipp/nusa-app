@@ -9,10 +9,10 @@ export default function Home() {
     <>
       <CssBaseline />
       <Hero />
-    <Box >
-      <DataSiswa/>
-      <AppCollection/>
-    </Box>
+      <Box >
+        <DataSiswa/>
+        <AppCollection/>
+      </Box>
     </>
 
   )

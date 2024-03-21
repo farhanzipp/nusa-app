@@ -1,12 +1,12 @@
-import { Box, Button, Chip, Container, Link, Paper } from '@mui/material'
+import { Box, Button, Chip, Container, Paper } from '@mui/material'
 import { blue, green, red, yellow } from '@mui/material/colors'
 import { BarChart, PieChart, pieArcLabelClasses } from '@mui/x-charts'
 import { useEffect, useState } from 'react';
 import { getDatasiswa } from '../utils/datasiswa_api';
+import { Link } from 'react-router-dom';
 
 export default function DataSiswa() {
     const [totalSiswa, setTotalSiswa] = useState();
-    const dataSiswaUrl = `http://${window.location.hostname}/nusa-app/datasiswa`
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,14 +78,11 @@ export default function DataSiswa() {
                         </Box>
                     </Container>
                     <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: '1.5rem' }}>
-                        <Button variant='outlined' >
-                        <Link
-                            href={dataSiswaUrl }
-                            underline="none"
-                        >
-                                {'More Info'}
-                        </Link>
-                        </Button>
+                            <Link to='datasiswa'>
+                                <Button variant='outlined' >
+                                    More Info
+                                </Button>
+                            </Link>
                     </Box>
                 </Paper>
             </Container>

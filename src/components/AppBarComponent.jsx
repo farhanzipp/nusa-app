@@ -14,6 +14,7 @@ export default function AppBarComponent() {
   const menus = [
     { title: 'Home', link: '/' },
     { title: 'Proposal', link: '/proposal' },
+    { title: 'Siswa', link: '/siswa' },
   ]
 
   const logoStyle = {

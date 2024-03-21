@@ -28,9 +28,7 @@ export default function Siswa() {
 
   return (
     <Box >
-      <DataGrid>
-
-      </DataGrid>
+      <h1>TEs</h1>
     </Box>
   )
 }
