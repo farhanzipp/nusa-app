@@ -2,7 +2,7 @@ import { Box, Button, Chip, Container, Paper } from '@mui/material'
 import { blue, green, red, yellow } from '@mui/material/colors'
 import { BarChart, PieChart, pieArcLabelClasses } from '@mui/x-charts'
 import { useEffect, useState } from 'react';
-import { getDatasiswa } from '../utils/datasiswa_api';
+import { getTotalSiswa } from '../utils/datasiswa_api';
 import { Link } from 'react-router-dom';
 
 export default function DataSiswa() {
@@ -11,7 +11,7 @@ export default function DataSiswa() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getDatasiswa();
+                const result = await getTotalSiswa();
                 setTotalSiswa(result.data);
             } catch (error) {
                 console.error('Error fetching data:', error);

@@ -1,6 +1,6 @@
 import { hostUrl } from "./host_url";
 
-export async function getDatasiswa() {
+export async function getTotalSiswa() {
     return fetch(`https://${hostUrl}/nusa-api/students/totals`, {
         method: 'GET',
         mode: 'cors',
@@ -9,8 +9,8 @@ export async function getDatasiswa() {
         .then(response => response.json());
 }
 
-export async function getAllSiswa() {
-    return fetch(`https://${hostUrl}/nusa-api/students/totals`, {
+export async function getAllSiswa(page, rows) {
+    return fetch(`https://${hostUrl}/nusa-api/students/profiles?page=${page}&limit=${rows}`, {
         method: 'GET',
         mode: 'cors',
         credentials: 'same-origin',
