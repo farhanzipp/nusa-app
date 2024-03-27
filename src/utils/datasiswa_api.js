@@ -17,3 +17,12 @@ export async function getAllSiswa(page, rows) {
     })
         .then(response => response.json());
 }
+
+export async function getDetailSiswa(id) {
+    return fetch(`https://${hostUrl}/nusa-api/students/profiles?id=${id}`, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'same-origin',
+    })
+        .then(response => response.json());
+}

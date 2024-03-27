@@ -17,13 +17,21 @@ export default function ProposalDateComponent() {
               id="date_started"
               name="date_started"
               label="Tgl Mulai"
-              required 
+              slotProps={{
+                textField: {
+                  required: true,
+                },
+              }}
             />
             <DatePicker 
               id="date_ended"
               name="date_ended"
               label="Tgl Selesai"  
-              required
+              slotProps={{
+                textField: {
+                  required: true,
+                },
+              }}
             />
 
         </Stack>

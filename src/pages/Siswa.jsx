@@ -1,59 +1,68 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { getAllSiswa } from "../utils/datasiswa_api";
+import { getAllSiswa, getTotalSiswa } from "../utils/datasiswa_api";
+import { ExportToExcel } from "../components/ExportToExcel";
+import SiswaModalDetail from "../components/Siswa/SiswaModalDetail";
 
 export default function Siswa() {
-  let rowCount = 300;
-  const [studentsList, setStudentsList] = useState([]);
-  const [rowCountState, setRowCountState] = useState(rowCount);
-  const [controller, setController] = useState({
+  const [studentsData, setStudentsData] = useState([]);
+  const [rowCountState, setRowCountState] = useState(0);
+  const [paginationModel, setPaginationModel] = useState({
     page: 0,
-    rowsPerPage: 10
+    pageSize: 10
   });
-  
+  const [loading, setLoading] = useState(false);
+  const fileName = "dataSiswa";
+
+  const [siswaId, setSiswaId] = useState();
+  const [open, setOpen]  = useState(false);
+
   useEffect(() => {
-    getAllSiswa(controller.page, controller.rowsPerPage)
-      .then(response => {
-        setStudentsList(response.data);
-      })
-      .catch(error => {
+    const fetchData = async () => {
+      try {
+        const result = await getAllSiswa(paginationModel.page, paginationModel.pageSize);
+        setStudentsData(result.data);
+        const total = await getTotalSiswa();
+        setRowCountState(total.data.total);
+        setLoading(false);
+      } catch (error) {
         console.error('Error fetching data:', error);
-      });
-  }, [controller.page, controller.rowsPerPage]);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [paginationModel]);
 
-  useEffect(() => {
-    setRowCountState((prevRowCountState) =>
-      rowCount !== undefined ? rowCount : prevRowCountState,
-    );
-  }, [rowCount, setRowCountState]);
 
-  const handleClick = () => {
-    console.log('hello');
-  }
-  const studentColumns = [
+  const Columns = [
+    { field: 'id', hideable: false },
     { field: 'no', headerName: 'No', width: 87 },
     { field: 'nisn', headerName: 'NISN', minWidth: 100 },
-    { field: 'name', headerName: 'Nama', minWidth: 200, sortable: false },
-    { field: 'dob', headerName: 'TTL', type: 'Date', minWidth: 120 },
-    { field: 'kelas', headerName: 'Kelas', minWidth: 120 },
+    { field: 'name', headerName: 'Nama', flex: 1, sortable: false },
+    { field: 'dob', headerName: 'TTL', type: 'Date' },
+    { field: 'kelas', headerName: 'Kelas'},
     {
       field: 'action',
       headerName: 'Action',
-      minWidth: 120,
-      renderCell: (params) => <Button variant='outlined' size='small' onClick={() => handleClick(params.row.siswa_id)}>Detail</Button>
+      renderCell: (params) => <Button variant='outlined' size='small' onClick={() => {handleClickOpen(params.row.id)}}>Detail</Button>
     },
   ];
 
-  const studentRows = studentsList.map((student, index) => ({
+  const Rows = studentsData.map((student, index) => ({
     id: student.replid,
-    no: index + 1,
+    no: index + 1 + paginationModel.page * paginationModel.pageSize,
     nisn: student.nisn,
     name: student.nama,
-    dob: dayjs(student.date_started).format('DD/MM/YYYY'),
+    dob: dayjs(student.tgllahir).format('DD/MM/YYYY'),
     kelas: student.kelas,
   }))
+ 
+  const handleClickOpen = (id) => {
+    setSiswaId(id)
+    setOpen(true);
+  }
 
   return (
     <Container sx={{ paddingTop: '6rem', minHeight: '90vh' }}>
@@ -65,13 +74,32 @@ export default function Siswa() {
       >
         DATA SISWA
       </Typography>
-      <DataGrid
-        columns={studentColumns}
-        rows={studentRows}
-        paginationMode="server"
-        rowCount={rowCountState}
-      />
+      <Box sx={{marginBottom: '1rem'}}>
+        <ExportToExcel apiData={Rows} fileName={fileName}/>
+      </Box>
 
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <DataGrid
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                id: false,
+              },
+            },
+          }}
+          columns={Columns}
+          rows={Rows}
+          rowCount={rowCountState}
+          pageSizeOptions={[10, 25, 50, 100]}
+          paginationModel={paginationModel}
+          paginationMode="server"
+          onPaginationModelChange={setPaginationModel}
+        />
+      )}
+
+      <SiswaModalDetail id={siswaId} open={open} setOpen={setOpen}/>
     </Container>
   )
 }

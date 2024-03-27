@@ -78,7 +78,7 @@ export default function DataSiswa() {
                         </Box>
                     </Container>
                     <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: '1.5rem' }}>
-                            <Link to='datasiswa'>
+                            <Link to='siswa'>
                                 <Button variant='outlined' >
                                     More Info
                                 </Button>

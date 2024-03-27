@@ -97,7 +97,7 @@ export default function ProposalModalDetail({ openDetail, setOpenDetail, proposa
                 }}
             >
                 <Stack>
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    <List sx={{ width: '80%', bgcolor: 'background.paper', marginX: 'auto', }}>
                         <ListItem>
                             <ListItemAvatar>
                                 <Avatar>
@@ -169,7 +169,7 @@ export default function ProposalModalDetail({ openDetail, setOpenDetail, proposa
                         variant="contained"
                         startIcon={<Download />}
                         sx={{
-                            width: { sm: '70%' },
+                            width: { sm: '50%' },
                             marginX: 'auto',
                             marginY: '1.5rem'
 

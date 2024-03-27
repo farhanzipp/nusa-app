@@ -55,7 +55,7 @@ export default function ProposalModalAdd({ open, setOpen }) {
         }
 
         const proposalFile = data.get('proposal_file')
-        const renamedProposalFile = renameProposalFile(proposalFile, proposalData.proposal_titles.toLowerCase().replace(/[^a-z]/g, "_"));
+        const renamedProposalFile = renameProposalFile(proposalFile, proposalData.proposal_titles.toLowerCase().replace(/[^a-z]/g, "_").substring(0, 10));
         pdfName = renamedProposalFile.name;
         proposalData.pdffile_titles = pdfName;
 

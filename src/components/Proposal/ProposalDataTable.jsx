@@ -10,7 +10,7 @@ export default function ProposalDataTable({proposals, setProposalId, setOpenDeta
 
   const proposalColumns = [
     { field: 'no', headerName: 'No', width: 87 },
-    { field: 'kegiatan', headerName: 'Kegiatan', minWidth: 300 },
+    { field: 'kegiatan', headerName: 'Kegiatan', flex: 1 },
     { field: 'panitia', headerName: 'Ketua Panitia', minWidth: 200, sortable: false },
     { field: 'date_started', headerName: 'Tgl Mulai', type: 'Date', minWidth: 120 },
     { field: 'date_ended', headerName: 'Tgl Selesai', minWidth: 120 },
