@@ -38,10 +38,10 @@ export default function Siswa() {
 
   const Columns = [
     { field: 'id', hideable: false },
-    { field: 'no', headerName: 'No', width: 87 },
+    { field: 'no', headerName: 'No', minWidth: 50 },
     { field: 'nisn', headerName: 'NISN', minWidth: 100 },
-    { field: 'name', headerName: 'Nama', flex: 1, sortable: false },
-    { field: 'dob', headerName: 'TTL', type: 'Date' },
+    { field: 'name', headerName: 'Nama',minWidth: 200, flex: 1, sortable: false },
+    { field: 'dob', headerName: 'TTL',minWidth: 210,flex: 1, type: 'Date' },
     { field: 'kelas', headerName: 'Kelas'},
     {
       field: 'action',
@@ -55,7 +55,7 @@ export default function Siswa() {
     no: index + 1 + paginationModel.page * paginationModel.pageSize,
     nisn: student.nisn,
     name: student.nama,
-    dob: dayjs(student.tgllahir).format('DD/MM/YYYY'),
+    dob: student.tmplahir + ', ' + dayjs(student.tgllahir).format('DD MMM YYYY'),
     kelas: student.kelas,
   }))
  
@@ -74,8 +74,9 @@ export default function Siswa() {
       >
         DATA SISWA
       </Typography>
+      
       <Box sx={{marginBottom: '1rem'}}>
-        <ExportToExcel apiData={Rows} fileName={fileName}/>
+        <ExportToExcel apiData={studentsData} fileName={fileName}/>
       </Box>
 
       {loading ? (
@@ -89,6 +90,7 @@ export default function Siswa() {
               },
             },
           }}
+          sx={{marginBottom: '1rem'}}
           columns={Columns}
           rows={Rows}
           rowCount={rowCountState}
